@@ -19,7 +19,7 @@ export class JsonschemaFormWidget extends BaseWidget {
 
     @inject(CommandService)
     protected readonly commands: CommandService;
-    
+
     protected sayHello: HTMLButtonElement;
 
     @postConstruct()
@@ -28,7 +28,7 @@ export class JsonschemaFormWidget extends BaseWidget {
         this.id = JsonschemaFormWidget.id + ':' + uri.toString()
         this.title.label = 'Form ' + uri.displayName;
         this.title.closable = true;
-        
+
         this.sayHello = document.createElement('button');
         this.sayHello.textContent = JsonschemaFormCommand.label;
         this.node.appendChild(this.sayHello);
@@ -43,5 +43,4 @@ export class JsonschemaFormWidget extends BaseWidget {
         super.onBeforeAttach(message);
         this.addEventListener(this.sayHello, 'click', () => this.commands.executeCommand(JsonschemaFormCommand.id));
     }
-
 }

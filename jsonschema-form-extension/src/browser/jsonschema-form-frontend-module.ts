@@ -1,18 +1,22 @@
 import { JsonschemaFormCommandContribution, JsonschemaFormMenuContribution } from './jsonschema-form-contribution';
 import {
     CommandContribution,
-    MenuContribution
+    MenuContribution,
+    MenuModelRegistry
 } from "@theia/core/lib/common";
 import { OpenHandler, WidgetFactory } from "@theia/core/lib/browser";
 import { ContainerModule } from "inversify";
 import { JsonschemaFormWidget, JsonschemaFormWidgetOptions } from './jsonschema-form-widget';
-import { JsonschemaFormOpenHandler } from './jsonschema-form-open-handler';
+import { JsonschemaFormOpenHandler, TestMenuMenuModelRegistry } from './jsonschema-form-open-handler';
 import URI from '@theia/core/lib/common/uri';
 
 export default new ContainerModule(bind => {
     // add your contribution bindings here
 
     bind(CommandContribution).to(JsonschemaFormCommandContribution).inSingletonScope();
+
+    bind(MenuModelRegistry).to(TestMenuMenuModelRegistry).inSingletonScope();
+
     bind(MenuContribution).to(JsonschemaFormMenuContribution).inSingletonScope();
 
     bind(OpenHandler).to(JsonschemaFormOpenHandler).inSingletonScope();

@@ -3,12 +3,21 @@ import { JsonschemaFormWidget } from "./jsonschema-form-widget";
 import URI from "@theia/core/lib/common/uri";
 import { injectable, inject } from "inversify";
 import { EditorManager } from "@theia/editor/lib/browser";
+import { MenuModelRegistry, MenuPath, Disposable } from "@theia/core";
+
+@injectable()
+export class TestMenuMenuModelRegistry extends MenuModelRegistry {
+    registerSubmenu(menuPath: MenuPath, label: string) : Disposable {
+        console.log("HELLO");
+        return super.registerSubmenu(menuPath, label);
+    }
+}
 
 @injectable()
 export class JsonschemaFormOpenHandler extends WidgetOpenHandler<JsonschemaFormWidget> {
-    
+
     readonly id = JsonschemaFormWidget.id;
-    readonly label = "Form";
+    // readonly label = "Form";
 
     @inject(EditorManager)
     protected readonly editorManager: EditorManager;
@@ -20,7 +29,14 @@ export class JsonschemaFormOpenHandler extends WidgetOpenHandler<JsonschemaFormW
      * A returned value indicating a priority of this handler.
      */
     canHandle(uri: URI): number {
-        return this.editorManager.canHandle(uri) / 2;
+        if(uri.path.ext !== ".json") {
+            return -1;
+        }
+
+        if(uri.displayName.endsWith("-data.json")) {
+            return 9000000;
+        }
+        return 1;
     }
-    
+
 }
