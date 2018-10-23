@@ -22,6 +22,17 @@ export class JsonschemaFormCommandContribution implements CommandContribution {
 }
 
 @injectable()
+export class TestContrib extends JsonschemaFormCommandContribution {
+
+    registerCommands(registry: CommandRegistry): void {
+        // registry.registerCommand(JsonschemaFormCommand, {
+        //     execute: () => this.messageService.info('Hello World!')
+        // });
+    }
+
+}
+
+@injectable()
 export class JsonschemaFormMenuContribution implements MenuContribution {
 
     registerMenus(menus: MenuModelRegistry): void {

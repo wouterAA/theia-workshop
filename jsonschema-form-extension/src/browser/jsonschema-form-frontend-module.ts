@@ -1,4 +1,4 @@
-import { JsonschemaFormCommandContribution, JsonschemaFormMenuContribution } from './jsonschema-form-contribution';
+import { JsonschemaFormCommandContribution, JsonschemaFormMenuContribution, TestContrib } from './jsonschema-form-contribution';
 import {
     CommandContribution,
     MenuContribution,
@@ -10,14 +10,18 @@ import { JsonschemaFormWidget, JsonschemaFormWidgetOptions } from './jsonschema-
 import { JsonschemaFormOpenHandler, TestMenuMenuModelRegistry } from './jsonschema-form-open-handler';
 import URI from '@theia/core/lib/common/uri';
 
-export default new ContainerModule(bind => {
+export default new ContainerModule((bind, u, i, rebind) => {
     // add your contribution bindings here
 
+    bind(JsonschemaFormCommandContribution).toSelf().inSingletonScope();
+    rebind(JsonschemaFormCommandContribution).to(TestContrib).inSingletonScope();
     bind(CommandContribution).to(JsonschemaFormCommandContribution).inSingletonScope();
 
     bind(MenuModelRegistry).to(TestMenuMenuModelRegistry).inSingletonScope();
 
     bind(MenuContribution).to(JsonschemaFormMenuContribution).inSingletonScope();
+
+
 
     bind(OpenHandler).to(JsonschemaFormOpenHandler).inSingletonScope();
     bind(WidgetFactory).toDynamicValue(({ container }) => ({
