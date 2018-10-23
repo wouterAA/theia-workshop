@@ -31,6 +31,4 @@ export class JsonschemaFormWidget extends BaseWidget {
         this.toDispose.push(Disposable.create(() => ReactDOM.unmountComponentAtNode(this.node)));
         ReactDOM.render(<JsonschemaFormView />, this.node);
     }
-
 }
-
