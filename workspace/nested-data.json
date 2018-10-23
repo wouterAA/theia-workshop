@@ -1,5 +1,5 @@
 {
-  "title": "Theia Workshop - Exercises",
+  "title": "Theia Workshop - Exercisesaasdfasdfasdfasdfasdfasdf",
   "tasks": [
     {
       "title": "Exercise-0: Build Theia Application",
@@ -23,5 +23,5 @@
     }
   ],
   "$schema": "nested-schema.json",
-  "$uiSchema": "nested-ui-schema.json"
+  "$uiSchema": "nested-ui-schema2.json"
 }
